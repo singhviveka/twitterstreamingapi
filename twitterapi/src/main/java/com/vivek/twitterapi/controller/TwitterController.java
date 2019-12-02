@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.w3c.dom.Notation;
 
 @RestController
 @RequestMapping(TwitterController.TWITTER_BASE_URI)
@@ -20,9 +21,13 @@ public class TwitterController {
 	private Twitter twitter;
 	
 	@GetMapping(value="{hashTag}")
-	public List<Tweet> getTweets(@PathVariable final String hashTag){
+	public List<Tweet> getTweetsByHashTag(@PathVariable final String hashTag){
 		return twitter.searchOperations().search(hashTag, 20).getTweets();
 		// here 20 is number of twittes you want
 	}
-
+	@GetMapping(value="{Notation}")
+	public List<Tweet> getTweetsByNotation(@PathVariable final String Notation){
+		return twitter.searchOperations().search(Notation, 20).getTweets();
+		// here 20 is number of twittes you want
+	}
 }
